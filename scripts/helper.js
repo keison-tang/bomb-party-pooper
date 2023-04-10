@@ -1,4 +1,4 @@
-export { GetWords, WordContainsSubstring };
+export { GetWordsWithSubstring };
 
 const url = chrome.runtime.getURL('words.txt');
 
@@ -12,6 +12,26 @@ async function GetWords() {
   const text = await response.text();
 
   return text.split(/\r?\n/);
+}
+
+/**
+ * Returns array of words containing input substring
+ *
+ * @param {string} substring
+ * @returns string[]
+ */
+async function GetWordsWithSubstring(substring) {
+  let matchedWords = [];
+
+  const words = await GetWords();
+
+  words.forEach((word) => {
+    if (WordContainsSubstring(word, substring)) {
+      matchedWords.push(word);
+    }
+  });
+
+  return matchedWords;
 }
 
 /**

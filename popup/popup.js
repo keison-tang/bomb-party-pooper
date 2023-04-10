@@ -1,4 +1,4 @@
-import { GetWords, WordContainsSubstring } from '../scripts/helper.js';
+import { GetWordsWithSubstring } from '../scripts/helper.js';
 
 chrome.runtime.onMessage.addListener(async function (
   request,
@@ -40,15 +40,7 @@ GetCurrentTab().then((tab) => {
 async function FindWords(substring) {
   const div = document.getElementById('matchedWords');
 
-  let matchedWords = [];
-
-  const words = await GetWords();
-
-  words.forEach((word) => {
-    if (WordContainsSubstring(word, substring)) {
-      matchedWords.push(word);
-    }
-  });
+  let matchedWords = await GetWordsWithSubstring(substring);
 
   //todo sort
 
