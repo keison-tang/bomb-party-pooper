@@ -1,4 +1,4 @@
-export { getWordsWithSubstring };
+export { getWordsWithSubstring, sortByLengthAndAlphabetical };
 
 const url = chrome.runtime.getURL('words.txt');
 
@@ -43,4 +43,15 @@ async function getWordsWithSubstring(substring) {
  */
 function wordContainsSubstring(word, substring) {
   return word.toLowerCase().includes(substring.toLowerCase());
+}
+
+/**
+ * In place sorting of an array by length and then alphabetically
+ *
+ * @param {string[]} array
+ */
+function sortByLengthAndAlphabetical(array) {
+  array.sort(function (a, b) {
+    return a.length - b.length || a.localeCompare(b);
+  });
 }

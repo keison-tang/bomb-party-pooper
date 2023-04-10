@@ -1,4 +1,7 @@
-import { getWordsWithSubstring } from '../scripts/helper.js';
+import {
+  getWordsWithSubstring,
+  sortByLengthAndAlphabetical,
+} from '../scripts/helper.js';
 
 chrome.runtime.onMessage.addListener(async function (
   request,
@@ -12,7 +15,7 @@ chrome.runtime.onMessage.addListener(async function (
   );
 
   if (request.action === 'SendSyllable') {
-    await findWords(request.syllable);
+    await setWords(request.syllable);
   }
 });
 
@@ -24,28 +27,32 @@ function injectContent(tab) {
     target: { tabId: id, allFrames: true },
     files: ['./scripts/content.js'],
   });
+
   console.log(`Loading: ${url}`);
 }
 
 async function getCurrentTab() {
-  let queryOptions = { active: true };
-  let [tab] = await chrome.tabs.query(queryOptions);
+  const queryOptions = { active: true };
+
+  //destructuring assignment [tab] gets first in array
+  const [tab] = await chrome.tabs.query(queryOptions);
+
   return tab;
 }
 
-getCurrentTab().then((tab) => {
-  injectContent(tab);
-});
-
-async function findWords(substring) {
+async function setWords(substring) {
   const div = document.getElementById('matchedWords');
 
   let matchedWords = await getWordsWithSubstring(substring);
 
-  //todo sort
+  sortByLengthAndAlphabetical(matchedWords);
 
   div.innerText = new Intl.ListFormat('en', {
     style: 'short',
     type: 'unit',
   }).format(matchedWords);
 }
+
+getCurrentTab().then((tab) => {
+  injectContent(tab);
+});
