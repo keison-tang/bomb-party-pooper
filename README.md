@@ -1,6 +1,25 @@
 # bomb-party-pooper
 
-Provides word hints while playing Bomb Party
+Provides word hints while playing [Bomb Party](https://jklm.fun/)
+
+[YouTube demo](https://youtu.be/djbJzNJ8thU)
+
+[![screenshot](https://i.ytimg.com/vi/djbJzNJ8thU/maxresdefault.jpg)](https://youtu.be/djbJzNJ8thU)
+
+## How to install
+
+- Clone/download repo
+- Load unpacked extension
+
+https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked
+
+## How to use
+
+When playing Bomb Party, click the extension icon to activate the extension.
+
+Or even better, set a shortcut in your browser settings to activate it, saving you vital milliseconds! Make sure you pick a shortcut combination that is unused.
+
+Once activated, it will display up to 50 of the shortest words that contain the detected syllable.
 
 ## Word list
 
