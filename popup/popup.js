@@ -1,4 +1,4 @@
-import { GetWordsWithSubstring } from '../scripts/helper.js';
+import { getWordsWithSubstring } from '../scripts/helper.js';
 
 chrome.runtime.onMessage.addListener(async function (
   request,
@@ -12,11 +12,11 @@ chrome.runtime.onMessage.addListener(async function (
   );
 
   if (request.action === 'SendSyllable') {
-    await FindWords(request.syllable);
+    await findWords(request.syllable);
   }
 });
 
-function InjectContent(tab) {
+function injectContent(tab) {
   const { id, url } = tab;
 
   //there are multiple iframes on the game page so send to all
@@ -27,20 +27,20 @@ function InjectContent(tab) {
   console.log(`Loading: ${url}`);
 }
 
-async function GetCurrentTab() {
+async function getCurrentTab() {
   let queryOptions = { active: true };
   let [tab] = await chrome.tabs.query(queryOptions);
   return tab;
 }
 
-GetCurrentTab().then((tab) => {
-  InjectContent(tab);
+getCurrentTab().then((tab) => {
+  injectContent(tab);
 });
 
-async function FindWords(substring) {
+async function findWords(substring) {
   const div = document.getElementById('matchedWords');
 
-  let matchedWords = await GetWordsWithSubstring(substring);
+  let matchedWords = await getWordsWithSubstring(substring);
 
   //todo sort
 

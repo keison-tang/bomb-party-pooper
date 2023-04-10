@@ -1,4 +1,4 @@
-export { GetWordsWithSubstring };
+export { getWordsWithSubstring };
 
 const url = chrome.runtime.getURL('words.txt');
 
@@ -7,7 +7,7 @@ const url = chrome.runtime.getURL('words.txt');
  *
  * @returns string[]
  */
-async function GetWords() {
+async function getWords() {
   const response = await fetch(url);
   const text = await response.text();
 
@@ -20,13 +20,13 @@ async function GetWords() {
  * @param {string} substring
  * @returns string[]
  */
-async function GetWordsWithSubstring(substring) {
+async function getWordsWithSubstring(substring) {
   let matchedWords = [];
 
-  const words = await GetWords();
+  const words = await getWords();
 
   words.forEach((word) => {
-    if (WordContainsSubstring(word, substring)) {
+    if (wordContainsSubstring(word, substring)) {
       matchedWords.push(word);
     }
   });
@@ -41,6 +41,6 @@ async function GetWordsWithSubstring(substring) {
  * @param {string} substring
  * @returns boolean
  */
-function WordContainsSubstring(word, substring) {
+function wordContainsSubstring(word, substring) {
   return word.toLowerCase().includes(substring.toLowerCase());
 }

@@ -3,7 +3,7 @@
  *
  * @param {string} syllable
  */
-function SendMessage(syllable) {
+function sendMessage(syllable) {
   const json = {
     action: 'SendSyllable',
     syllable: syllable,
@@ -14,14 +14,14 @@ function SendMessage(syllable) {
   chrome.runtime.sendMessage(json);
 }
 
-function FindSyllable() {
+function findSyllable() {
   const syllableElements = document.getElementsByClassName('syllable');
 
   console.log(syllableElements);
 
   if (syllableElements[0]?.innerText) {
-    SendMessage(syllableElements[0].innerText);
+    sendMessage(syllableElements[0].innerText);
   }
 }
 
-FindSyllable();
+findSyllable();
