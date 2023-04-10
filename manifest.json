@@ -6,6 +6,7 @@
   "permissions": ["scripting", "activeTab"],
   "host_permissions": ["https://*.jklm.fun/*"],
   "action": {
+    "default_title": "Bomb Party Hints",
     "default_popup": "popup/popup.html"
   },
   "web_accessible_resources": [{ "resources": ["words.txt"], "matches": [] }]

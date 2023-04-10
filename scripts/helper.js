@@ -25,11 +25,13 @@ async function getWordsWithSubstring(substring) {
 
   const words = await getWords();
 
-  words.forEach((word) => {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+
     if (wordContainsSubstring(word, substring)) {
       matchedWords.push(word);
     }
-  });
+  }
 
   return matchedWords;
 }

@@ -17,7 +17,9 @@ function sendMessage(syllable) {
 function findSyllable() {
   const syllableElements = document.getElementsByClassName('syllable');
 
-  console.log(syllableElements);
+  if (syllableElements.length) {
+    console.log(syllableElements);
+  }
 
   if (syllableElements[0]?.innerText) {
     sendMessage(syllableElements[0].innerText);

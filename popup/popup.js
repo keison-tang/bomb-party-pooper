@@ -41,16 +41,19 @@ async function getCurrentTab() {
 }
 
 async function setWords(substring) {
-  const div = document.getElementById('matchedWords');
+  const syllableElement = document.getElementById('syllable');
+  const matchesElement = document.getElementById('matchedWords');
 
   let matchedWords = await getWordsWithSubstring(substring);
 
   sortByLengthAndAlphabetical(matchedWords);
 
-  div.innerText = new Intl.ListFormat('en', {
+  syllableElement.innerText = `Syllable: ${substring}`;
+
+  matchesElement.innerText = new Intl.ListFormat('en', {
     style: 'short',
     type: 'unit',
-  }).format(matchedWords);
+  }).format(matchedWords.slice(0, 50));
 }
 
 getCurrentTab().then((tab) => {

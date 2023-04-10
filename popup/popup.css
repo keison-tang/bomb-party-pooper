@@ -1,0 +1,14 @@
+body {
+  width: 15rem;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+#matchedWords {
+  padding: 0.5rem;
+  font-size: 1.2em;
+  line-height: calc(1ex / 0.32);
+}
