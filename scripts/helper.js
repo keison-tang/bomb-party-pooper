@@ -1,6 +1,6 @@
 export { getWordsWithSubstring, sortByLengthAndAlphabetical };
 
-const url = chrome.runtime.getURL('words.txt');
+const url = chrome.runtime.getURL('assets/words.txt');
 
 /**
  * Returns array of words from text file
