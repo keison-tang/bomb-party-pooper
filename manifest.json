@@ -3,6 +3,8 @@
   "name": "Bomb Party Pooper",
   "version": "1.0.0",
   "description": "Provides word hints while playing Bomb Party",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://falcon.jklm.fun/*"],
   "action": {
     "default_popup": "popup/popup.html"
   },
