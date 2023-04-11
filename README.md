@@ -1,6 +1,6 @@
 # bomb-party-pooper
 
-Provides word hints while playing [Bomb Party](https://jklm.fun/)
+Chrome extension that provides word hints while playing [Bomb Party](https://jklm.fun/)
 
 [YouTube demo](https://youtu.be/djbJzNJ8thU)
 
