@@ -3,6 +3,9 @@ import {
   sortByLengthAndAlphabetical,
 } from '../scripts/helper.js';
 
+const CONTENT_SCRIPT_PATH = './scripts/content.js';
+const CONTENT_INPUT_SCRIPT_PATH = './scripts/content-input.js';
+
 chrome.runtime.onMessage.addListener(async function (
   request,
   sender,
@@ -15,17 +18,38 @@ chrome.runtime.onMessage.addListener(async function (
   );
 
   if (request.action === 'SendSyllable') {
-    await setWords(request.syllable);
+    const words = await setWords(request.syllable);
+
+    if (request.isSelfTurn) {
+      getCurrentTab().then(async (tab) => {
+        const { id, url } = tab;
+
+        //there are multiple iframes on the game page so send to all
+        await chrome.scripting.executeScript({
+          target: { tabId: id, allFrames: true },
+          files: [CONTENT_INPUT_SCRIPT_PATH],
+        });
+
+        console.log(`Loading: ${url}`);
+
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+
+        await chrome.tabs.sendMessage(tab.id, {
+          action: 'SendInput',
+          wordToInput: randomWord,
+        });
+      });
+    }
   }
 });
 
-function injectContent(tab) {
+function injectContent(tab, contentScriptPath) {
   const { id, url } = tab;
 
   //there are multiple iframes on the game page so send to all
   chrome.scripting.executeScript({
     target: { tabId: id, allFrames: true },
-    files: ['./scripts/content.js'],
+    files: [contentScriptPath],
   });
 
   console.log(`Loading: ${url}`);
@@ -45,17 +69,19 @@ async function setWords(substring) {
   const matchesElement = document.getElementById('matchedWords');
 
   let matchedWords = await getWordsWithSubstring(substring);
-
   sortByLengthAndAlphabetical(matchedWords);
+  matchedWords = matchedWords.slice(0, 50);
 
   syllableElement.innerText = `Syllable: ${substring}`;
 
   matchesElement.innerText = new Intl.ListFormat('en', {
     style: 'short',
     type: 'unit',
-  }).format(matchedWords.slice(0, 50));
+  }).format(matchedWords);
+
+  return matchedWords;
 }
 
 getCurrentTab().then((tab) => {
-  injectContent(tab);
+  injectContent(tab, CONTENT_SCRIPT_PATH);
 });
