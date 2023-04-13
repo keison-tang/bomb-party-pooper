@@ -28,6 +28,18 @@ chrome.runtime.onMessage.addListener(async function (
   if (request.action === 'SendSyllable') {
     const words = await setWords(request.syllable);
 
+    let isLazyModeEnabled;
+
+    await chrome.storage.sync
+      .get({ isLazyModeEnabled: false })
+      .then((items) => {
+        isLazyModeEnabled = items.isLazyModeEnabled;
+      });
+
+    if (!isLazyModeEnabled) {
+      return;
+    }
+
     if (request.isSelfTurn) {
       getCurrentTab().then(async (tab) => {
         const { id, url } = tab;
