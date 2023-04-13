@@ -12,3 +12,7 @@ h2 {
   font-size: 1.2em;
   line-height: calc(1ex / 0.32);
 }
+
+#buttonSection {
+  padding: 0.5rem;
+}

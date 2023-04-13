@@ -6,6 +6,14 @@ import {
 const CONTENT_SCRIPT_PATH = './scripts/content.js';
 const CONTENT_INPUT_SCRIPT_PATH = './scripts/content-input.js';
 
+document.querySelector('#optionsButton').addEventListener('click', function () {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options/options.html'));
+  }
+});
+
 chrome.runtime.onMessage.addListener(async function (
   request,
   sender,

@@ -3,7 +3,7 @@
   "name": "Bomb Party Pooper",
   "version": "1.0.0",
   "description": "Provides word hints while playing Bomb Party",
-  "permissions": ["scripting", "activeTab"],
+  "permissions": ["scripting", "activeTab", "storage"],
   "host_permissions": ["https://*.jklm.fun/*"],
   "action": {
     "default_title": "Bomb Party Hints",
@@ -15,5 +15,6 @@
     "32": "assets/images/icon-32.png",
     "48": "assets/images/icon-48.png",
     "128": "assets/images/icon-128.png"
-  }
+  },
+  "options_page": "options/options.html"
 }
