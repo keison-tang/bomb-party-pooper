@@ -7,6 +7,12 @@ h2 {
   text-align: center;
 }
 
+#lazyModeStatus {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bolder;
+}
+
 #matchedWords {
   padding: 0.5rem;
   font-size: 1.2em;

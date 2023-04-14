@@ -40,26 +40,32 @@ chrome.runtime.onMessage.addListener(async function (
       return;
     }
 
-    if (request.isSelfTurn) {
-      getCurrentTab().then(async (tab) => {
-        const { id, url } = tab;
+    const lazyModeElement = document.getElementById('lazyModeStatus');
 
-        //there are multiple iframes on the game page so send to all
-        await chrome.scripting.executeScript({
-          target: { tabId: id, allFrames: true },
-          files: [CONTENT_INPUT_SCRIPT_PATH],
-        });
-
-        console.log(`Loading: ${url}`);
-
-        const randomWord = words[Math.floor(Math.random() * words.length)];
-
-        await chrome.tabs.sendMessage(tab.id, {
-          action: 'SendInput',
-          wordToInput: randomWord,
-        });
-      });
+    if (!request.isSelfTurn) {
+      lazyModeElement.innerText = `It's not your turn`;
+      return;
     }
+
+    getCurrentTab().then(async (tab) => {
+      const { id, url } = tab;
+
+      //there are multiple iframes on the game page so send to all
+      await chrome.scripting.executeScript({
+        target: { tabId: id, allFrames: true },
+        files: [CONTENT_INPUT_SCRIPT_PATH],
+      });
+
+      console.log(`Loading: ${url}`);
+
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      lazyModeElement.innerText = `Typing: ${randomWord}`;
+
+      await chrome.tabs.sendMessage(tab.id, {
+        action: 'SendInput',
+        wordToInput: randomWord,
+      });
+    });
   }
 });
 
