@@ -21,6 +21,16 @@ Or even better, set a shortcut in your browser settings to activate it, saving y
 
 Once activated, it will display up to 50 of the shortest words that contain the detected syllable.
 
+### Lazy Mode
+
+Head to extension options to enable **Lazy Mode**.
+
+When the extension is activated and it's your turn, it will randomly pick one of the displayed hint words and type it into the input.
+
+You still have to submit it yourself by hitting the enter key.
+
+Use at your own risk. Not responsible for ruined friendships! 🐸☕
+
 ## Word list
 
 25,322 words
