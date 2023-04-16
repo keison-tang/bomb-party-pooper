@@ -8,7 +8,7 @@ Chrome extension that provides word hints while playing [Bomb Party](https://jkl
 
 ## How to install
 
-- Clone/download repo
+- Download a release version or clone repo
 - Load unpacked extension
 
 https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked
